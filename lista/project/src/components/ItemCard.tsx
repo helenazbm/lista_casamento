@@ -12,23 +12,21 @@ export function ItemCard({ item, onSelect }: ItemCardProps) {
   const [showNameInput, setShowNameInput] = useState(false)
 
   const handleCheck = () => {
-    if (!item.is_selected) {
-      setShowNameInput(true)
-    } else {
-      onSelect(item.id)
-      setGiftedBy('')
-      setShowNameInput(false)
+    // Se o item já está selecionado, não faz nada.
+    if (item.is_selected) {
+      return;
     }
-  }
+    setShowNameInput(true);
+  };
 
   const handleConfirmSelection = () => {
-    onSelect(item.id, giftedBy)
-    setShowNameInput(false)
-  }
+    onSelect(item.id, giftedBy);
+    setShowNameInput(false);
+  };
 
   return (
     <div className={`bg-white rounded-xl shadow-sm border-2 transition-all duration-300 hover:shadow-md ${
-      item.is_selected ? 'border-rose-200 bg-rose-50' : 'border-gray-100 hover:border-rose-100'
+      item.is_selected ? 'border-rose-200' : 'border-gray-100 hover:border-rose-100'
     }`}>
       <div className="p-4">
         <div className="flex items-start justify-between">
