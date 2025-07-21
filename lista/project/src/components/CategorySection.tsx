@@ -8,17 +8,27 @@ interface CategorySectionProps {
   onSelectItem: (itemId: string, giftedBy?: string) => void
 }
 
+const categoryColors: { [key: string]: string } = {
+  cozinha: 'bg-card-cozinha',
+  'cama-mesa-banho': 'bg-card-mesa-banho',
+  eletrodomesticos: 'bg-card-eletrodomesticos',
+  outros: 'bg-card-outros',
+};
+
 export function CategorySection({
+  categoryKey,
   categoryName,
   items,
-  onSelectItem
+  onSelectItem,
 }: CategorySectionProps) {
+  const bgColor = categoryColors[categoryKey] || 'bg-background';
+
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-      <div className="bg-gradient-to-r from-rose-100 to-pink-100 px-6 py-4 border-b border-gray-100">
-        <h2 className="text-xl font-semibold text-gray-800">{categoryName}</h2>
+    <div className="overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm">
+      <div className={`${bgColor} border-b border-gray-100 px-6 py-4`}>
+        <h2 className="text-xl font-semibold text-text-primary">{categoryName}</h2>
       </div>
-      
+
       <div className="p-6">
         {items.length > 0 ? (
           <div className="grid gap-4 md:grid-cols-2">
